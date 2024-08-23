@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "winversegmnew",
+    "password": "t8^mV04c1",
+    "database": "admin_winversegmnew",
+    "host": "103.180.163.173",
+    "dialect": "mysql"
+  },
+  "test": {
+   "username": "winversegmnew",
+    "password": "t8^mV04c1",
+    "database": "admin_winversegmnew",
+    "host": "103.180.163.173",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "winversegmnew",
+    "password": "t8^mV04c1",
+    "database": "admin_winversegmnew",
+    "host": "103.180.163.173",
+    "dialect": "mysql"
+  }
+}
