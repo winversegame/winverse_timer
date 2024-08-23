@@ -17,7 +17,7 @@ exports.generatedTimeEveryAfterEveryOneMin = (io) => {
 
 async function OneMinWinGo() {
   try {
-    await axios.get("https://adminew.winversegame.com/api/resultonemin");
+    await axios.get("https://admin.zupeegame.info/api/resultonemin");
   } catch (e) {
     console.log(e);
   }
