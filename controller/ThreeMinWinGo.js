@@ -21,7 +21,7 @@ exports.generatedTimeEveryAfterEveryThreeMin = (io) => {
 async function threeMinWingo() {
   try {
     const res = await axios.get(
-      "https://adminew.winversegame.com/public/api/resultthreemin"
+      "https://adminew.winversegame.com/api/resultthreemin"
     );
   } catch (e) {
     console.log(e);

@@ -5,13 +5,9 @@ const cors = require("cors");
 const moment = require("moment");
 require("dotenv").config();
 const schedule = require("node-schedule");
-// const OneMinTrx = require("./controller/OneMinTrx");
-// const ThreeMinTrx = require("./controller/ThreeMinTrx");
-// const FiveMinTrx = require("./controller/FiveMinTrx");
-// const OneMinWinGo = require("./controller/OneMinWinGo");
-// const ThreeMinWinGo = require("./controller/ThreeMinWinGo");
-// const FiveMinWinGo = require("./controller/FiveMinWinGo");
-// const AviatorStart = require("./controller/AviatorStart");
+const OneMinWinGo = require("./controller/OneMinWinGo");
+const ThreeMinWinGo = require("./controller/ThreeMinWinGo");
+const FiveMinWinGo = require("./controller/FiveMinWinGo");
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -55,7 +51,6 @@ if (x) {
     // OneMinTrx.insertOneMinTrxResultByCron();
     
     // AviatorStart.aviator_Start_function(io);
-    OneMinTrx.generatedTimeEveryAfterEveryOneMinTRX(io);
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
     ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
     FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);

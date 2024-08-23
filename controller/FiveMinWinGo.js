@@ -23,7 +23,7 @@ exports.generatedTimeEveryAfterEveryFiveMin = (io) => {
 async function fiveMinTrx() {
   try {
     const res = await axios.get(
-      "https://adminew.winversegame.com/public/api/resultfivemin"
+      "https://adminew.winversegame.com/api/resultfivemin"
     );
   } catch (e) {
     console.log(e);
