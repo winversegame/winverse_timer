@@ -1,5 +1,4 @@
 const sequelize = require("../config/db.config");
-let bet_data = [];
 let already_call_functon = true;
 let total_cashout_temp = 0;
 let total_bet_place_temp = 0;

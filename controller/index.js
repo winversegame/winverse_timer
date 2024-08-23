@@ -1,6 +1,4 @@
-const { default: Sequelize } = require("@sequelize/core");
 const sequelize = require("../config/db.config");
-const { queryDb, getAlredyPlacedBet } = require("../helper/adminHelper");
 const { failMsg } = require("../helper/helperResponse");
 
 exports.getGameHistory = async (req, res) => {
