@@ -31,25 +31,32 @@ exports.getGameHistory = async (req, res) => {
     return failMsg("Something went worng in node api");
   }
 };
-exports.getMyHistory = async (req, res) => {
-  const { gameid, userid } = req.body;
+exports.betPlacingWingo = async (req, res) => {
+  const { userid, amount, number, gameid } = req.body;
 
-  if (!gameid || !userid) {
-    return res.status(400).json({
+  if (!gameid || !userid || !amount || !number) {
+    return res.status(201).json({
       // Changed to 400 for bad request
-      msg: "gameid and userid are required",
+      msg: "Everything is required.",
     });
   }
   try {
-    const query = `SELECT * FROM tr35_retopup_temp WHERE tr_user_id = ? AND tr_type = 1 ORDER BY tr_transid DESC LIMIT 200`;
+    const query = `CALL sp_fund_member_topup(?,?,?,?,?,@msg,@msg2);`;
+    await sequelize.query(query, {
+      replacements: [
+        Number(userid),
+        Number(gameid),
+        Number(number),
+        Number(amount),
+        Number(userid),
+      ],
+    });
+    const query_for_msg = `SELECT @msg as message;`;
     await sequelize
-      .query(query, {
-        replacements: [Number(userid)],
-      })
+      .query(query_for_msg)
       .then((result) => {
         return res.status(200).json({
-          msg: "Data fetched successfully",
-          earning: result?.[0],
+          msg: result?.[0]?.[0]?.message
         });
       })
       .catch((e) => {
@@ -58,7 +65,9 @@ exports.getMyHistory = async (req, res) => {
         });
       });
   } catch (e) {
-    return failMsg("Something went worng in node api");
+    return res.status(500).json({
+      msg:"Somethig went wrong in bet placing."
+    })
   }
 };
 
@@ -197,21 +206,20 @@ exports.get_Royality_Date = async (req, res) => {
 
   try {
     const query = `CALL sp_for_reamining_days_to_achive_ro_club(?,@remaining_days,@type_of_club); `;
-    await sequelize
-      .query(query, {
-        replacements: [id],
-      });
+    await sequelize.query(query, {
+      replacements: [id],
+    });
 
-      const [resultMessage] = await sequelize.query(
-        "SELECT @remaining_days,@type_of_club;"
-      );
-      return res.status(200).json({
-            msg: "Data found successfully",
-            data: {
-              date: resultMessage?.[0]?.["@remaining_days"],
-              club: resultMessage?.[0]?.["@type_of_club"],
-            },
-          });
+    const [resultMessage] = await sequelize.query(
+      "SELECT @remaining_days,@type_of_club;"
+    );
+    return res.status(200).json({
+      msg: "Data found successfully",
+      data: {
+        date: resultMessage?.[0]?.["@remaining_days"],
+        club: resultMessage?.[0]?.["@type_of_club"],
+      },
+    });
   } catch (e) {
     return failMsg("Something went worng in node api");
   }
