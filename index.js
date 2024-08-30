@@ -4,6 +4,8 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const moment = require("moment");
 require("dotenv").config();
+const bodyParser = require('body-parser');
+
 const schedule = require("node-schedule");
 const OneMinWinGo = require("./controller/OneMinWinGo");
 const ThreeMinWinGo = require("./controller/ThreeMinWinGo");
@@ -25,8 +27,9 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
-app.use(express.json());
+app.use(cors(corsOptions)); // Apply CORS middleware
+app.use(bodyParser.json({ limit: '10mb' })); // Body parser for JSON
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // Body parser for URL-encoded data
 
 const PORT = process.env.PORT || 4000;
 const allRoutes = require("./routes/Routes");
@@ -65,8 +68,9 @@ const finalRescheduleJob = schedule.scheduleJob(
     // FiveMinTrx.generatedTimeEveryAfterEveryFiveMinTRX(io);
   }
 );
-// AviatorStart.aviator_Start_function(io);
-//////////////////////////
+// OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
+// ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
+// FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
 app.get("/", (req, res) => {
   res.send(`<h1>server running at port=====> ${PORT}</h1>`);
 });

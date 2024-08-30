@@ -1,13 +1,14 @@
 const express = require("express");
-const { getGameHistory, placeBetTrx, get_Royality_Date, betPlacingWingo } = require("../controller");
+const { getGameHistory, betPlacingWingo, topWinners, lastTradeTopWinners, fundRequst } = require("../controller");
 const { betPlacedAviator, cashOutFunction, getGameHistoryAviator, getLederData, getWalletByUserId, getMyHistoryByID, getTopRecordsAviator } = require("../controller/AviatorStart");
 // const { betPlacedAviator } = require("../controller/aviatorStart");
 const router = express.Router();
 
-router.post("/trx_result-node", getGameHistory);
-router.post("/bid-placed-node", placeBetTrx);
-router.get("/get-royality-date", get_Royality_Date);
+router.post("/wingo-result", getGameHistory);
 router.post("/bid-placing-wingo", betPlacingWingo);
+router.get("/top-winners", topWinners);
+router.get("/last-trade-top-winners", lastTradeTopWinners);
+router.post("/fund-request", fundRequst);
 
 
 
