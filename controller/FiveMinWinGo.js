@@ -10,8 +10,9 @@ exports.generatedTimeEveryAfterEveryFiveMin = (io) => {
     io.emit("fivemin", `${min}_${timeToSend}`);
     if (currentTime === 0) {
       min--;
+
+      if (min <= 0 && currentTime === 5) fiveMinTrx();
       if (min < 0) {
-        fiveMinTrx();
         min = 4; // Reset min to 2 when it reaches 0
       }
     }
