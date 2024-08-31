@@ -4,8 +4,8 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const moment = require("moment");
 require("dotenv").config();
-const bodyParser = require('body-parser');
-
+const bodyParser = require("body-parser");
+const soment = require("moment-timezone");
 const schedule = require("node-schedule");
 const OneMinWinGo = require("./controller/OneMinWinGo");
 const ThreeMinWinGo = require("./controller/ThreeMinWinGo");
@@ -28,14 +28,13 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions)); // Apply CORS middleware
-app.use(bodyParser.json({ limit: '10mb' })); // Body parser for JSON
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true })); // Body parser for URL-encoded data
+app.use(bodyParser.json({ limit: "10mb" })); // Body parser for JSON
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true })); // Body parser for URL-encoded data
 
 const PORT = process.env.PORT || 4000;
 const allRoutes = require("./routes/Routes");
 app.use("", allRoutes);
 io.on("connection", (socket) => {});
-
 
 let x = true;
 let trx = true;
@@ -49,28 +48,33 @@ if (x) {
     moment(new Date()).format("HH:mm:ss"),
     secondsUntilNextMinute
   );
-////////////
+  ////////////
   setTimeout(() => {
-    // OneMinTrx.insertOneMinTrxResultByCron();
-    
-    // AviatorStart.aviator_Start_function(io);
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
-    ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
-    FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
     x = false;
   }, secondsUntilNextMinute * 1000);
 }
 
-const finalRescheduleJob = schedule.scheduleJob(
-  "15,30,45,0 * * * *",
-  function () {
-    // ThreeMinTrx.generatedTimeEveryAfterEveryThreeMinTRX(io);
-    // FiveMinTrx.generatedTimeEveryAfterEveryFiveMinTRX(io);
-  }
-);
-// OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
-// ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
-// FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
+if (trx) {
+  const now = new Date();
+  const nowIST = soment(now).tz("Asia/Kolkata");
+
+  const currentMinute = nowIST.minutes();
+  const currentSecond = nowIST.seconds();
+
+  const minutesRemaining = 15 - currentMinute - 1;
+  const secondsRemaining = 60 - currentSecond;
+
+  const delay = (minutesRemaining * 60 + secondsRemaining) * 1000;
+  console.log(minutesRemaining, secondsRemaining, delay);
+
+  setTimeout(() => {
+    ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
+    FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
+    trx = false;
+  }, delay);
+}
+
 app.get("/", (req, res) => {
   res.send(`<h1>server running at port=====> ${PORT}</h1>`);
 });
