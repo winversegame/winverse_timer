@@ -50,7 +50,7 @@ if (x) {
   );
   ////////////
   setTimeout(() => {
-    // OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
+    OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
     x = false;
   }, secondsUntilNextMinute * 1000);
 }
@@ -69,8 +69,8 @@ if (trx) {
   console.log(minutesRemaining, secondsRemaining, delay);
 
   setTimeout(() => {
-    // ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
-    // FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
+    ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
+    FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
     trx = false;
   }, delay);
 }
