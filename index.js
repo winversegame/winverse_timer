@@ -74,7 +74,7 @@ if (trx) {
     trx = false;
   }, delay);
 }
- ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
+//  ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
 
 app.get("/", (req, res) => {
   res.send(`<h1>server running at port=====> ${PORT}</h1>`);
