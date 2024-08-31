@@ -9,9 +9,9 @@ exports.generatedTimeEveryAfterEveryOneMin = (io) => {
         ? 60 - currentTime.getSeconds()
         : currentTime.getSeconds();
     io.emit("onemin", timeToSend); // Emit the formatted time
-    if (timeToSend === 4) {
-      OneMinWinGo();
-    }
+    // if (timeToSend === 4) {
+    //   OneMinWinGo();
+    // }
   });
 };
 
