@@ -6,10 +6,7 @@ const moment = require("moment");
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const soment = require("moment-timezone");
-const schedule = require("node-schedule");
 const OneMinWinGo = require("./controller/OneMinWinGo");
-const ThreeMinWinGo = require("./controller/ThreeMinWinGo");
-const FiveMinWinGo = require("./controller/FiveMinWinGo");
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -33,6 +30,7 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true })); // Body parse
 
 const PORT = process.env.PORT || 4000;
 const allRoutes = require("./routes/Routes");
+const { generatedTimeEveryAfterEveryOneMinTRX } = require("./controller/TrxTimer");
 app.use("", allRoutes);
 io.on("connection", (socket) => {});
 
@@ -51,28 +49,9 @@ if (x) {
   ////////////
   setTimeout(() => {
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
+    generatedTimeEveryAfterEveryOneMinTRX(io);
     x = false;
   }, secondsUntilNextMinute * 1000);
-}
-
-if (trx) {
-  const now = new Date();
-  const nowIST = soment(now).tz("Asia/Kolkata");
-
-  const currentMinute = nowIST.minutes();
-  const currentSecond = nowIST.seconds();
-
-  const minutesRemaining = 30 - currentMinute - 1;
-  const secondsRemaining = 60 - currentSecond;
-
-  const delay = (minutesRemaining * 60 + secondsRemaining) * 1000;
-  console.log(minutesRemaining, secondsRemaining, delay);
-
-  setTimeout(() => {
-    // ThreeMinWinGo.generatedTimeEveryAfterEveryThreeMin(io);
-    // FiveMinWinGo.generatedTimeEveryAfterEveryFiveMin(io);
-    trx = false;
-  }, delay);
 }
 
 app.get("/", (req, res) => {

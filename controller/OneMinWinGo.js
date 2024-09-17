@@ -8,17 +8,8 @@ exports.generatedTimeEveryAfterEveryOneMin = (io) => {
       currentTime.getSeconds() > 0
         ? 60 - currentTime.getSeconds()
         : currentTime.getSeconds();
-    io.emit("onemin", timeToSend); // Emit the formatted time
-    // if (timeToSend === 4) {
-    //   OneMinWinGo();
-    // }
+    io.emit("onemin", timeToSend);
+   
   });
 };
 
-async function OneMinWinGo() {
-  try {
-    await axios.get("https://admin.zupeegame.info/api/resultonemin");
-  } catch (e) {
-    console.log(e);
-  }
-}
