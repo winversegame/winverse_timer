@@ -70,7 +70,7 @@ exports.generatedTimeEveryAfterEveryOneMinTRX = (io) => {
     // }
   });
 };
-
+///////////////
 const sendOneMinResultToDatabase = async (time, obj) => {
   const newString = obj.hash;
   let num = null;
