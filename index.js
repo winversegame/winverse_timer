@@ -30,7 +30,9 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true })); // Body parse
 
 const PORT = process.env.PORT || 4000;
 const allRoutes = require("./routes/Routes");
-const { generatedTimeEveryAfterEveryOneMinTRX } = require("./controller/TrxTimer");
+const {
+  generatedTimeEveryAfterEveryOneMinTRX,
+} = require("./controller/TrxTimer");
 app.use("", allRoutes);
 io.on("connection", (socket) => {});
 
