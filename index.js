@@ -33,6 +33,7 @@ const allRoutes = require("./routes/Routes");
 const {
   generatedTimeEveryAfterEveryOneMinTRX,
 } = require("./controller/TrxTimer");
+
 app.use("", allRoutes);
 io.on("connection", (socket) => {});
 
@@ -48,7 +49,7 @@ if (x) {
     moment(new Date()).format("HH:mm:ss"),
     secondsUntilNextMinute
   );
-  
+
   setTimeout(() => {
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
     generatedTimeEveryAfterEveryOneMinTRX(io);
