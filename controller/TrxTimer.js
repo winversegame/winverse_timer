@@ -9,14 +9,20 @@ const schedule = require("node-cron");
 
 exports.generatedTimeEveryAfterEveryOneMinTRX = (io) => {
   let oneMinTrxJob = schedule.schedule("* * * * * *", function () {
-    const currentTime = new Date();
-    const timeToSend =
-      currentTime.getSeconds() > 0
-        ? 60 - currentTime.getSeconds()
-        : currentTime.getSeconds();
-    io.emit("onemintrx", timeToSend);
+    // const currentTime = new Date();
+    // const timeToSend =
+    //   currentTime.getSeconds() > 0
+    //     ? 60 - currentTime.getSeconds()
+    //     : currentTime.getSeconds();
+    // io.emit("onemintrx", timeToSend);
+    const now = new Date();
+    const nowIST = soment(now).tz("Asia/Kolkata");
 
-    if (timeToSend === 6) {
+    const currentMinute = nowIST.minutes();
+    const currentSecond = nowIST.seconds();
+    io.emit("onemintrx", `${currentMinute}_${currentSecond}`);
+
+    if (currentSecond === 56) {
       let timetosend = new Date();
       timetosend.setSeconds(54);
       timetosend.setMilliseconds(0);
