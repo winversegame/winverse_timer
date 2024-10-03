@@ -51,7 +51,7 @@ if (x) {
   );
 
   setTimeout(() => {
-    // OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
+    OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
     generatedTimeEveryAfterEveryOneMinTRX(io);
     x = false;  
   }, secondsUntilNextMinute * 1000);
