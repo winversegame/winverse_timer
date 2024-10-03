@@ -101,12 +101,4 @@ const sendOneMinResultToDatabase = async (time, obj) => {
     .catch((e) => {
       console.log(e);
     });
-
-  // const queryToSendResult = `CALL trx_clear_bet(?);`;
-
-  // await queryDb(queryToSendResult, [Number(num)])
-  //   .then((result) => {})
-  //   .catch((e) => {
-  //     console.log("Something went wrong in clear one bet trx");
-  //   });
 };
