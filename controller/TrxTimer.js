@@ -22,7 +22,7 @@ exports.generatedTimeEveryAfterEveryOneMinTRX = (io) => {
     const currentSecond = nowIST.seconds();
     io.emit("onemintrx", `${currentMinute}_${currentSecond}`);
 
-    if (currentSecond === 56) {
+    if (currentSecond === 54) {
       let timetosend = new Date();
       timetosend.setSeconds(54);
       timetosend.setMilliseconds(0);
