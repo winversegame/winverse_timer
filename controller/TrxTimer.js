@@ -1,4 +1,3 @@
-const soment = require("moment-timezone");
 const { default: axios } = require("axios");
 const {
   queryDb,
@@ -6,6 +5,7 @@ const {
 } = require("../helper/adminHelper");
 const moment = require("moment");
 const schedule = require("node-cron");
+const soment = require("moment-timezone");
 
 exports.generatedTimeEveryAfterEveryOneMinTRX = (io) => {
   let oneMinTrxJob = schedule.schedule("* * * * * *", function () {
