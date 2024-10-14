@@ -49,7 +49,7 @@ if (x) {
     moment(new Date()).format("HH:mm:ss"),
     secondsUntilNextMinute
   );
-///////////////////
+
   setTimeout(() => {
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
     generatedTimeEveryAfterEveryOneMinTRX(io);
