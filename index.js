@@ -33,6 +33,7 @@ const allRoutes = require("./routes/Routes");
 const {
   generatedTimeEveryAfterEveryOneMinTRX,
 } = require("./controller/TrxTimer");
+const { aviator_Start_function } = require("./controller/AviatorStart");
 
 app.use("", allRoutes);
 io.on("connection", (socket) => {});
@@ -53,9 +54,10 @@ if (x) {
   setTimeout(() => {
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
     generatedTimeEveryAfterEveryOneMinTRX(io);
-    x = false;  
+    x = false;
   }, secondsUntilNextMinute * 1000);
 }
+aviator_Start_function(io);
 app.get("/", (req, res) => {
   res.send(`<h1>server running at port=====> ${PORT}</h1>`);
 });
