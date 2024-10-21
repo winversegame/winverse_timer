@@ -53,7 +53,7 @@ if (x) {
 
   setTimeout(() => {
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
-    // generatedTimeEveryAfterEveryOneMinTRX(io);
+    generatedTimeEveryAfterEveryOneMinTRX(io);
     x = false;
   }, secondsUntilNextMinute * 1000);
 }
@@ -61,7 +61,7 @@ aviator_Start_function(io);
 app.get("/", (req, res) => {
   res.send(`<h1>server running at port=====> ${PORT}</h1>`);
 });
-
+/////////
 httpServer.listen(PORT, () => {
   console.log("Server listening on port", PORT);
 });

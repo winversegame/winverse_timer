@@ -253,7 +253,7 @@ exports.aviator_Start_function = async (io) => {
       clearInterval(crashInterval);
       clearInterval(timerInterval);
       clearInterval(crashInterval);
-       console.log("thisFunctonMustBePerFormAfterCrash HOOOOOOO crached");
+      //  console.log("thisFunctonMustBePerFormAfterCrash HOOOOOOO crached");
       // const round = await GameRound?.find({});
       io.emit("crash", true);
 
