@@ -53,7 +53,7 @@ if (x) {
 
   setTimeout(() => {
     OneMinWinGo.generatedTimeEveryAfterEveryOneMin(io);
-    generatedTimeEveryAfterEveryOneMinTRX(io);
+    // generatedTimeEveryAfterEveryOneMinTRX(io);
     x = false;
   }, secondsUntilNextMinute * 1000);
 }
